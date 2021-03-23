@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>MWM Daty</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <!-- <link href="../css/dateCSS.css" rel="stylesheet" type="text/css"/> -->
+        <link href="../css/mwmCSS.css" rel="stylesheet" type="text/css"/>
+        <script src="../js/calendarJS.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div id="mainDate" class="mainDate">
+            <h3>Obsługa kalendarza</h3>
+            <p class="">Dzień twojego życia itp. czyli JavaScript w akcji.</p>
+            <div id="inputDate" class="inputDate">
+                <!--<form id="firstDateEntered" action ="">-->
+                    <input type="text" id="enterYourDay" class="inputBox" value=""  size="2" />
+                    <input type="text" id="enterYourMonth" class="inputBox" value="" size="2"/>
+                    <input type="text" id="enterYourYear" class="inputBox" value="" size="2"/>
+                    <input type="button" onclick="firstDates()" value="Wprowadź pierwszą datę" />
+
+                    <input type="text" id="enterYourDays" class="inputBox" value="" size="5" />
+               <!-- </form>     -->
+            </div>
+            
+            <div>
+                <p id="message"></p>
+                <p>Urodziłeś się: 
+                    <span id="firstDate" class="specialDay"></span>
+                    <span id="leapYear"></span>                
+                </p>
+                
+                <p>
+                    Dzisiaj jest: 
+                    <span id="dayOfYourLife" class="specialDay"></span>
+                    <span id="party"></span>
+                </p>
+                <p>
+                    <span id="enteredDaysOfLife"></span>
+                    <span id="leapYear2"></span>
+                </p>
+                
+               
+            </div>
+            
+        </div>
+    </body>
+</html>

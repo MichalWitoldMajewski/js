@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="pl-PL">
+    <head>
+        <title>MWM System</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        
+        <link href="css/mwmCSS.css" rel="stylesheet" type="text/css"/>
+        
+        <script src="js/mwmJS.js" type="text/javascript"></script>
+        <!-- <script src="js/calendarJS.js" type="text/javascript"></script>
+        <script src="js/dateLang.js" type="text/javascript"></script> -->
+    </head>
+    <body>
+        <div id="container" class="container">
+            <div id="header" class="header">
+                <div id="headerPage"></div>
+            </div> <!-- koniec header -->
+            
+            <div id="content" class="content">
+                <button class="tablink" onclick="openPage('Home', this, 'red')" >Home</button>
+                <button class="tablink" onclick="openPage('Calendar', this, 'green')" id="defaultOpen">Kalendarz</button>
+                <button class="tablink" onclick="openPage('Media', this, 'orange')" >Media</button>
+                <button class="tablink" onclick="openPage('Gallery', this, 'blue')">Galerie</button>
+               
+                <div id="Home" class="tabcontent">
+                  <div id="subpageHome"></div>                    
+                </div>
+
+                <div id="Calendar" class="tabcontent">                                                            
+                    <div id="subpageCalendar"></div>                                        
+                </div>
+
+                <div id="Media" class="tabcontent">
+                    <div id="subpageMedia"></div>                    
+                </div>
+                
+                <div id="Gallery" class="tabcontent">
+                    <div id="subpageGallery"></div>                    
+                </div>
+                
+            </div><!-- koniec content-->
+                        
+            <div id="footer" class="footer">
+                <div id="footerPage"></div>
+            </div><!-- koniec footer -->
+        </div> <!-- koniec container -->
+       
+        <script>         
+            document.getElementById("defaultOpen").click();
+        </script>
+    </body>
+</html>

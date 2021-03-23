@@ -1,0 +1,143 @@
+/* -- resetowania ustawien css -- */
+* {
+margin: 0;
+padding: 0;
+border: 0;
+line-height: 1.4em;
+vertical-align: baseline;
+text-decoration: none;
+outline: 0;
+}
+/* -- koniec resetowania ustawien css -- */
+:root{
+    --height: 900px;
+    --height-header: 200px;
+}
+
+.container{
+    height: var(--height);
+}
+.header{
+    background-color: grey;
+    color: whitesmoke;
+    height: 200px;
+    float: left;
+    width: 100%;
+}
+.content{
+    background-color: yellow;
+    color: blanchedalmond;
+    height: calc(var(--height) - 40%);
+    float: left;
+    width: 100%;
+}
+.footer{
+    background-color: gray;
+    color: whitesmoke;
+    height: 10%;
+    float: left;
+    width: 100%;
+}
+
+/* zawartosc strony */
+/* Set height of body and the document to 100% to enable "full page tabs" */
+body, html {
+  height: 100%;
+  margin: 0;
+  font-family: Arial;
+}
+
+/* Style tab links */
+.tablink {
+  background-color: #555;
+  color: white;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  font-size: 20px;
+  width: 25%;
+  font-weight: bold;
+}
+
+.tablink:hover {
+  background-color: #777;
+  text-shadow: 5px 5px 2px black;
+}
+
+/* Style the tab content (and add height:100% for full page content) */
+.tabcontent {
+  color: white;
+  display: none;
+  padding: 100px 20px;
+  height: 70%;
+}
+
+#Home {background-color: red;}
+#Calendar {background-color: green;}
+#Gallery {background-color: blue;}
+#Media {background-color: orange;}
+/* koniec zawartosci strony */
+
+/* --- animacja matrixa --- */
+.startPos{
+   margin-left: 25%;
+}
+
+#matrixAnime{
+    width: 100%;
+    height: 150px;
+    /*color: white;*/
+    position: relative;
+    background: matrixanime 3s infinite;
+}
+
+/* pierwsza wersja anikmacji */
+@keyframes matrixanime {
+   0% {color: yellow; opacity:1;}
+   75% {color: yellow; opacity: 0.25;}
+   100% {color:black; opacity:0; transform: translate(0px, 100px);}
+}
+
+
+/* --- koniec animacji matrix --- */
+
+
+
+/* definicje pozostalych elementow */
+h3{
+    text-align: center;
+    text-shadow: 2px 2px 2px black;
+}
+
+.specialDay{
+    font-weight: bold;
+}
+.party{
+    color: beige;
+ 
+    text-shadow: 0px 0px 10px black;
+    font-weight: bold;
+}
+
+.inputDate{
+    
+}
+/* --- podstrony --- */
+.mainDate{
+    
+}
+
+.inputDate{
+    
+}
+
+.inputBox{}
+
+.mediaCenter{
+    
+    align-content: center;
+}
+
+.mediaCenter{}
