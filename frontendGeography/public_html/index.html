@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>MWM Calendar</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   
+        <style>
+            ul {
+                list-style-type: none;
+            }
+            .specialDay{
+                color: #4CAF50;
+                font-weight: bold;
+            }
+            .container{
+                display: block;
+                text-align: center;
+                color: blue;
+            }
+            .screen{
+                display: block;
+                margin: auto;
+                /*margin-left: auto;
+                margin-right: auto;*/
+                text-align: center;
+                /*background-color: yellowgreen;*/
+                width: 800px;
+                height: 400px;
+            }
+            .keybord{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                text-align: center;
+                /*background-color: orange;*/
+                width: 800px;
+                height: 130px;
+            }
+            .inputBox{
+                border: 2px solid #4CAF50;
+                border-radius: 5px;
+                box-sizing: border-box;
+                color: blue;
+                display: inline-block;
+                font-size: 15px;
+                padding: 5px 10px;
+                text-align: center;
+            }
+            
+            .inputDate{
+                float: left;
+            }
+            
+            .button{
+                width: 190px;
+                display: inline-block;
+                padding: 5px 10px;
+                font-size: 15px;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                outline: none;
+                color: #fff;
+                background-color: #4CAF50;
+                border: none;
+                border-radius: 10px;
+                /* box-shadow: 0 5px #999;*/
+            }
+            .button:hover {background-color: #3e8e41}
+
+            .button:active {
+                background-color: #3e8e41;
+               /* box-shadow: 0 1px #666;
+                transform: translateY(4px);*/
+            }
+            
+            .buttonDate{
+                width: 190px;
+                display: inline-block;
+                padding: 5px 10px;
+                font-size: 15px;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                outline: none;
+                color: #fff;
+                background-color: #4CAF00;
+                border: none;
+                border-radius: 10px;
+                /* box-shadow: 0 5px #999;*/
+            }
+            .buttonDate:hover {background-color: #3e8e41}
+
+            .buttonDate:active {
+                background-color: #3e8e41;
+               /* box-shadow: 0 1px #666;
+                transform: translateY(4px);*/
+            }
+            
+            .buttonSmall{
+                width: 150px;
+                display: inline-block;
+                padding: 5px 10px;
+                font-size: 15px;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                outline: none;
+                color: #fff;
+                background-color: #4CAF50;
+                border: none;
+                border-radius: 15px;
+                /* box-shadow: 0 5px #999;*/
+            }
+            .buttonSmall:hover {background-color: #3e8e41}
+
+            .buttonSmall:active {
+                background-color: #3e8e41;
+               /* box-shadow: 0 1px #666;
+                transform: translateY(4px);*/
+            }
+        </style>
+    </head>
+    
+    
+    <body>
+    <div id="container">
+            <!-- SCREEN -->
+            <form method="post">    
+            <div id="screen" class="screen">
+                <p id="warning"></p>
+                 <div id="firstDate">
+                    <p><!-- powtorzenie wprowadzonych informacji -->
+                        <span id="firstDateStart"></span>
+                        <span id="firstDateInfo" class="specialDay"></span>
+                        <span id="firstDateLeapYear"></span>                
+                    </p>
+
+                    <p><!-- wyliczenie ile dni upłynęło od pierwszej daty do dzisiaj -->
+                        <span id="firstDayBeginnig" ></span>
+                        <span id="firstDateMessage" class="specialDay"></span>
+                        <span id="firstDateParty"></span>
+                        <br />
+                    </p>
+                    <p><!-- wyliczenie kiedy wypadnie dzien podany przez uzytkownika -->
+                        <span id="firstDateChoose"></span>
+                        <!-- <span id="leapYear2"></span> -->
+                        <br />
+                    </p>
+                </div>
+                 
+                <!-- display : second date-->       
+                <div id="secondDate">
+                    <p>
+                        <br />
+                        <span id="secondDateStart"></span>
+                        <span id="secondDateInfo" class="specialDay"></span>
+                        <span id="secondDateLeapYear"></span> 
+                        <br />
+                    </p>
+
+                    <p>
+                        <span id="secondDateBeginnig" ></span>
+                        <span id="secondDateMessage" class="specialDay"></span>
+                        <span id="secondDateParty"></span>
+                        <br />
+                    </p>
+                    <p>
+                        <span id="secondDateChoose"></span>
+                        <!-- <span id="leapYear2"></span> -->
+                        <br />
+                    </p>
+                </div>
+               
+                <div>
+                    <p><br /><span id="add2Dates"></span></p>
+                    <p><span id="subtract2Dates"></span></p>
+                </div>
+             
+            </div><!-- end screen -->
+            <!-- KEYBORD -->
+        <div id="keybord" class="keybord">
+            <div class="keybord">
+                <!-- entered dates -->
+                <div id="inputDate" class="inputDate">
+                        <!--<form id="firstDateEntered" action ="">-->
+                        <!-- <input type="checkbox" name="cbDate1" value="ON" /> -->
+                     <ul>
+                        <li>
+                            <input type="text" id="enterFirstDay" name="enterFirstDay" class="inputBox" value=""  size="2" />
+                            <input type="text" id="enterFirstMonth" name="enterFirstMonth" class="inputBox" value="" size="2"/>
+                            <input type="text" id="enterFirstYear" name="enterFirstYear" class="inputBox" value="" size="2"/>
+                        </li>
+                        <li>
+                            <input type="button" onclick="firstDates()" class="button" value="Wprowadź pierwszą datę" />
+                        </li>
+                    </ul>
+                </div>
+                
+                <div id="enterFindingDays" class="inputDate">
+                    <ul>
+                        <li><input type="text" id="enterYourDays" class="inputBox" value="" size="15" /></li>
+                        <li><input type="button" onclick="daysOfYourLife0()" class="buttonDate" value="Wyznacz daty" /></li>
+                    </ul>
+                </div>
+            
+                <div id="inputDate2" class="inputDate">
+                        <!--<form id="firstDateEntered" action ="">-->
+                        <!-- <input type="checkbox" name="cbDate2" value="ON" /> -->
+                    <ul>
+                        <li>
+                            <input type="text" id="enterSecondDay" name="enterSecondDay" class="inputBox" value=""  size="2" />
+                            <input type="text" id="enterSecondMonth" name="enterSecondMonth" class="inputBox" value="" size="2"/>
+                            <input type="text" id="enterSecondYear" name="enterSecondYear" class="inputBox" value="" size="2"/>
+                        </li>
+                        <li>
+                            <input type="button" onclick="secondDates()" class="button" value="Wprowadź drugą datę" />
+                        </li>
+                    </ul>
+                </div>
+                <div id="fourButtons" >
+                     <input type="button" onclick="add2dates()" class="buttonSmall" value="dodaj 2 daty" />
+                     <input type="button" onclick="daysOfYourLife1()" class="buttonDate" value="Przelicz pierwszą datę" />
+                     <input type="button" onclick="daysOfYourLife2()" class="buttonDate" value="Przelicz drugą datę" />
+                     <input type="button" onclick="subtract2dates()()" class="buttonSmall" value="różnica 2 dat" />
+                </div>
+            </div>        
+        </div><!-- end keybord -->
+         </form>
+    </div><!-- end container -->
+  
+    <!-- scripts -->   
+    <script>    
+    // --- stale i zmienne dla obslugi dat / const and variables for operating on date---
+const oneDay = 86400000; //86 400 000 milisekund = 1 dzien / day
+var sysDate = new Date();
+var firstDate = new Date();
+var secondDate = new Date();
+var temp1Date, temp2Date;
+var partyValue = 500;
+var d = new Date();
+
+// name of month
+const nameMonthFullPL = 
+        ["styczeń", "luty", "marzec", "kwiecień", "maj", "czerwiec",
+        "lipiec", "sierpień", "wrzesień", "październik", "listopad", "grudzień"];
+
+const nameMonthFullEN = 
+        ["January","February","March","April","May","June",
+        "July","August","September","October","November","December"];
+
+const nameMonthFullGE =
+        ["Januar", "Februar", "März", "April", "Mai", "Juni",
+        "Juli", "August", "September", "Oktober", "November", "Dezember"];
+
+const nameMonthFullES =
+        ["enero", "febrero", "marzo", "abril", "mayo", "junio",
+        "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
+    
+const nameMonthFullIT =
+        ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno",
+        "luglio", "agosto", "settembre", "ottobre", "novembre", "dicembre"];
+
+// name of days
+const nameDayFullPL = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+const nameDayFullEN = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const nameDayFullGE = ["Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag"];
+const nameDayFullES = ["domingo", "lunes", "martes", "miércoles", "jueves", "viernes", "sábado"];
+const nameDayFullIT = ["domenica", "lunedì", "martedì", "mercoledì", "giovedì", "venerdì", "sabato"];
+
+const normalYear = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; //rok zwykly
+const leapYear = [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]; //rok przestepny
+
+//var firstDate = enteredDate();
+// --- koniec zmiennych do obslugi daty ---
+
+//odsluga daty
+function firstDates(){
+    //var firstDay = document.getElementById("enterFirstDay").value;
+    //var firstMonth = document.getElementById("enterFirstMonth").value;
+    //var firstYear = document.getElementById("enterFirstYear").value;
+    
+    firstDate = enteredFirstDate();
+   
+    writeFirstDate(firstDate);
+}
+
+function enteredFirstDate(){
+    //var firstDay, firstMonth, firstYear;
+    var dateEntered = new Date();
+    var maxDay;// enteredMonth;
+    var message;
+    var dayOK, monthOK, yearOK;
+    
+    // sprawdzenie poprawnosci wprowadzonych danych
+    
+    firstDay = document.getElementById("enterFirstDay").value;
+    firstMonth = document.getElementById("enterFirstMonth").value;
+    firstYear = document.getElementById("enterFirstYear").value;
+    message = "Uwagi: ";
+    
+    //enteredMonth = yourMonth - 1;
+     
+    if (isNaN(firstYear) || 
+            firstYear === null || 
+            firstYear === "" || 
+            firstYear === " " || 
+            firstYear === "  " || 
+            firstYear === ";" || 
+            firstYear === 0) {
+        message += "Wprowadź rok.";
+    } else {
+        yearOK = true;
+    }
+    
+     if (isNaN(firstMonth) || 
+             firstMonth < 1 || 
+             firstMonth > 12 || 
+             firstMonth === null || 
+             firstMonth === "" || 
+             firstMonth === " " || 
+             firstMonth === "  " || 
+             firstMonth === ";") 
+     {
+        message += "Wprowadź miesiąc. "; 
+    } else {
+        monthOK = true;
+    }
+    
+     if (checkLeapYear(firstYear) === true){
+        maxDay = leapYear[firstMonth - 1];
+    } else {
+        maxDay = normalYear[firstMonth - 1]; 
+    }
+    
+        if (isNaN(firstDay) || 
+                firstDay < 1 || 
+                firstDay > maxDay || 
+                firstDay === null || 
+                firstDay === "" || 
+                firstDay === " " ||
+                firstDay === "  " || 
+                firstDay === ";")
+        { message += "Wprowadź dzień. "; 
+    } else {
+        dayOK = true; 
+    }
+     
+    if (dayOK === true && monthOK === true && yearOK === true) {
+        document.getElementById("warning").innerHTML = "" ;
+        dateEntered.setFullYear(firstYear, firstMonth - 1, firstDay);
+        return dateEntered;
+           /*new Date(firstYear, firstMonth, firstDay); */
+    } else {
+        document.getElementById("warning").innerHTML = message;
+    }
+}
+//---------------------
+function writeFirstDate(firstDate){
+    var leapYearCheck;
+    var message;
+    
+    // -- wypisanie daty urodzenia
+   // document.getElementById("warning").innerHTML = "" ;
+    
+    // -- elementy do tlumaczenia na jezyk obcy --
+     
+    document.getElementById("firstDateStart").innerHTML = "1) Pierwsza data: ";
+    message = nameDayFullPL[firstDate.getDay()] + ", " + 
+            firstDate.getDate() + " " +
+            nameMonthFullPL[firstDate.getMonth()] +  " " +
+            firstDate.getFullYear();
+    // -- koniec tlumacza --
+    
+    document.getElementById("firstDateInfo").innerHTML = message; 
+   
+    
+    leapYearCheck = checkLeapYear(firstDate.getFullYear());
+    if (leapYearCheck === true){
+        document.getElementById("firstDateLeapYear").innerHTML = "(rok przestępny).";        
+    } else {
+        document.getElementById("firstDateLeapYear").innerHTML = "(rok normalny).";
+    }
+    
+    // informacja o party time
+    if ((howManyDaysBetween(sysDate, firstDate) % partyValue) === 0) {
+        document.getElementById("firstDateParty").innerHTML = "Party Time! ";
+        alert("Party Time!");}
+    else {document.getElementById("firstDateParty").innerHTML = " ";}
+    
+    // -- wypisanie ktory dzien zycia
+    document.getElementById("firstDayBeginnig").innerHTML = "Dzisiaj jest: ";
+    document.getElementById("firstDateMessage").innerHTML =
+             howManyDaysBetween(sysDate, firstDate) + " czyli "
+            + yearsMonthDaysBetweenPL(sysDate, firstDate);
+}
+
+function secondDates(){
+    secondDate = enteredSecondDate();
+    writeDate2(secondDate);
+}
+function enteredSecondDate(){
+    var dateEntered = new Date();
+    var secondDay, secondMonth, secondYear;
+    var maxDay;// enteredMonth;
+    var message;
+    var dayOK, monthOK, yearOK;
+   
+    // sprawdzenie poprawnosci wprowadzonych danych
+    secondDay = document.getElementById("enterSecondDay").value;
+    secondMonth = document.getElementById("enterSecondMonth").value;
+    secondYear = document.getElementById("enterSecondYear").value;
+    message = "Uwagi: ";
+    
+     if (isNaN(secondYear) || 
+            secondYear === null || 
+            secondYear === "" || 
+            secondYear === " " || 
+            secondYear === "  " || 
+            secondYear === ";" || 
+            secondYear === 0) {
+        message += "Wprowadź rok.";
+    } else {
+        yearOK = true;
+    }
+    
+     if (isNaN(secondMonth) || 
+             secondMonth < 1 || 
+             secondMonth > 12 || 
+             secondMonth === null || 
+             secondMonth === "" || 
+             secondMonth === " " || 
+             secondMonth === "  " || 
+             secondMonth === ";") 
+     {
+        message += "Wprowadź miesiąc. "; 
+    } else {
+        monthOK = true;
+    }
+    
+     if (checkLeapYear(secondYear) === true){
+        maxDay = leapYear[secondMonth - 1];
+    } else {
+        maxDay = normalYear[secondMonth - 1]; 
+    }
+    
+        if (isNaN(secondDay) || 
+                secondDay < 1 || 
+                secondDay > maxDay || 
+                secondDay === null || 
+                secondDay === "" || 
+                secondDay === " " ||
+                secondDay === "  " || 
+                secondDay === ";")
+        { message += "Wprowadź dzień. "; 
+    } else {
+        dayOK = true; 
+    }
+     
+    if (dayOK === true && monthOK === true && yearOK === true) {
+        document.getElementById("warning").innerHTML = "" ;
+        dateEntered.setFullYear(secondYear, secondMonth - 1, secondDay);
+        return dateEntered;
+           /*new Date(firstYear, firstMonth, firstDay); */
+    } else {
+        document.getElementById("warning").innerHTML = message;
+    }
+}
+
+function writeDate2(secondDate){
+    var leapYearCheck;
+    var message;
+    
+    // -- wypisanie daty urodzenia
+    //document.getElementById("warning").innerHTML = "" ;
+    
+    // -- elementy do tlumaczenia na jezyk obcy --
+    document.getElementById("secondDateStart").innerHTML = "2) Druga data: " ;
+    message = nameDayFullPL[secondDate.getDay()] + ", " + 
+            secondDate.getDate() + " " +
+            nameMonthFullPL[secondDate.getMonth()] +  " " +
+            secondDate.getFullYear();
+    document.getElementById("secondDateInfo").innerHTML = message;
+        // -- koniec tlumacza --
+    
+    leapYearCheck = checkLeapYear(secondDate.getFullYear());
+    if (leapYearCheck === true){
+        document.getElementById("secondDateLeapYear").innerHTML = "(rok przestępny).";        
+    } else {
+        document.getElementById("secondDateLeapYear").innerHTML = "(rok normalny).";
+    }
+    
+    // informacja o party time
+    if ((howManyDaysBetween(sysDate, secondDate) % 500) === 0) {
+        document.getElementById("secondDateParty").innerHTML = "Party Time! ";
+        alert("Party Time!");}
+    else {document.getElementById("secondDateParty").innerHTML = " ";}
+    
+    // -- wypisanie ktory dzien zycia
+    document.getElementById("secondDateBeginnig").innerHTML = "Dzisiaj jest: ";
+    document.getElementById("secondDateMessage").innerHTML =
+             howManyDaysBetween(sysDate, secondDate) + " czyli "
+            + yearsMonthDaysBetweenPL(sysDate, secondDate) + ".";
+}
+
+//--
+function enterDays(){
+    enteredDays = document.getElementById("enterYourDays").value;
+     if(isNaN(enteredDays) || enteredDays === null){
+         alert("Podaj ilość dni.");
+     } else {
+         return enteredDays;
+     }
+}
+//------------------------------------------------------------------------------------------------------------------------
+function daysOfYourLife0(){
+    daysOfYourLife1();
+    daysOfYourLife2(); 
+}
+
+function daysOfYourLife1(){
+    var sysDate, yourDate, daysDate; // correctDate;
+    var enteredYourDays;
+    var leapYearCheck;
+    var message;
+    
+    sysDate = new Date();
+    yourDate = enteredFirstDate();
+    enteredYourDays = document.getElementById("enterYourDays").value;
+    //correctDate = new Date(yourDate.getFullYear(), yourDate.getMonth() - 1, yourDate.getDate());
+    daysDate = dayYouChoose(firstDate, enteredYourDays);
+    
+    //daysBeetwenDates = howManyDaysBetween(sysDate, yourDate);
+  
+    // komunikat na strone 
+    message = enteredYourDays +
+            " dzień wypada w " +
+            nameDayFullPL[daysDate.getDay()] + ", " + 
+            daysDate.getDate() + " " +
+            nameMonthFullPL[daysDate.getMonth()] +  " " +
+            daysDate.getFullYear();
+    
+    leapYearCheck = checkLeapYear(daysDate.getFullYear());
+    if (leapYearCheck === true){
+        message += ", rok przestępny.";
+    } else {
+        message += ", rok normalny.";
+    }
+    /* wypisanie info na ekranie */
+    document.getElementById("firstDateChoose").innerHTML = message;
+    
+}
+function daysOfYourLife2(){
+    var sysDate, yourDate, daysDate; //correctDate;
+    var enteredYourDays;
+    var leapYearCheck;
+    var message;
+    
+    sysDate = new Date();
+    yourDate = enteredSecondDate();
+    enteredYourDays = document.getElementById("enterYourDays").value;
+    //correctDate = new Date(yourDate.getFullYear(), yourDate.getMonth() - 1, yourDate.getDate());
+    daysDate = dayYouChoose(secondDate, enteredYourDays);
+    
+    //daysBeetwenDates = howManyDaysBetween(sysDate, yourDate);
+    
+    // komunikat na strone 
+    message = enteredYourDays +
+            " dzień wypada w " +
+            nameDayFullPL[daysDate.getDay()] + ", " + 
+            daysDate.getDate() + " " +
+            nameMonthFullPL[daysDate.getMonth()] +  " " +
+            daysDate.getFullYear();
+    
+    leapYearCheck = checkLeapYear(daysDate.getFullYear());
+    if (leapYearCheck === true){
+        message += ", rok przestępny.";
+    } else {
+        message += ", rok normalny.";
+    }
+    document.getElementById("secondDateChoose").innerHTML = message;
+
+}
+
+//--
+//sprawdzenie roku przestepnego
+function checkLeapYear (yourYearEntered){
+    if( ((yourYearEntered % 4) === 0 && (yourYearEntered % 100 !== 0)) || (yourYearEntered % 400) === 0) {
+        return true;// ", rok przestępny!";
+    } else {
+        return false;// ", rok zwykły.";
+    }
+}
+
+function howManyDaysBetween(sysDate, enteredDate){
+   // document.getElementById("dayOfYourLife").innerHTML = Math.floor((sysDate - myDate));
+    return Math.floor((sysDate - enteredDate) / oneDay);
+}
+
+function yearsMonthDaysBetweenPL(date1, date2){
+    var diff = new Date(Math.abs(date1.getTime() - date2.getTime()));
+    return (diff.getFullYear() - 1970) + " lat " + diff.getMonth() + " miesięcy " + (diff.getDate() - 1) + " dni.";
+    //(diff.getFullYear() - 1970) + " lat " + diff.getMonth() + " miesięcy " + (diff.getDate() - 1) + " dni";
+}
+
+function dayYouChoose(myDate, howManyDays){ 
+     return new Date(myDate.getTime() + (howManyDays * oneDay));
+}
+
+//odejmowanie dat
+function subtract2dates(){ 
+    document.getElementById("subtract2Dates").innerHTML = "Różnica podanych dat wynosi " + 
+            Math.abs(howManyDaysBetween(sysDate, firstDate) - howManyDaysBetween(sysDate, secondDate)) + " dni : " +
+            yearsMonthDaysBetweenPL( firstDate, secondDate);
+} 
+//dodawanie dat
+function add2dates() {
+  
+    var add2;
+    var add2Date;
+    
+    add2 = howManyDaysBetween(sysDate, firstDate) + howManyDaysBetween(sysDate, secondDate);
+    //alert(howManyDaysBetween(sysDate, firstDate));
+    add2Date = new Date(add2 * oneDay);
+    
+    document.getElementById("add2Dates").innerHTML = " Suma podanych dat wynosi "  + add2 + ": " +
+            (add2Date.getFullYear() - 1970) + " lat " + 
+            add2Date.getMonth() + " miesiecy "  + 
+            add2Date.getDate() + " dni";
+}
+    </script>   
+    
+    </body>
+</html>
